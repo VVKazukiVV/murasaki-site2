@@ -3,73 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murasaki Games - Official Website</title>
+    <title>Murasaki Games | Official Website</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --primary-color: #8a2be2; /* Murasaki Purple */
+            --secondary-color: #00ff7f; /* Game UI Green */
+            --text-main: #c5c6c7;
+            --text-light: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #1a1a1a;
-            color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
         header {
-            background-color: #111;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid #ff4757;
+            background: linear-gradient(135deg, #121212 0%, var(--bg-color) 100%);
+            border-bottom: 2px solid var(--primary-color);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        h1 { margin: 0; color: #ff4757; }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: radial-gradient(circle at center, #241442 0%, var(--bg-color) 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* Game Overview & Features */
         .container {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 20px;
-            background: #222;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
-        h2 { color: #ffa502; border-bottom: 1px solid #444; padding-bottom: 5px; }
-        ul { padding-left: 20px; }
-        footer {
+
+        .game-title {
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #888;
-            background: #111;
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
         }
-        a { color: #ff4757; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 4px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .feature-card h3 {
+            color: var(--text-light);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Media Gallery Section */
+        .gallery-section {
+            background-color: #121212;
+            padding: 60px 20px;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        .gallery-title {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            border: 2px solid #222;
+            cursor: pointer;
+            aspect-ratio: 16 / 9;
+            background-color: #000;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Lightbox Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 85%;
+            max-height: 85%;
+            border: 3px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050508;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
     </style>
 </head>
 <body>
 
+    <!-- Header & Navigation -->
     <header>
-        <h1>Murasaki Games</h1>
-        <p>Official Developer Website</p>
+        <div class="logo">Murasaki <span>Games</span></div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#gallery">Gallery</a>
+        </nav>
     </header>
 
-    <div class="container">
-        <h2>Fool Knights</h2>
-        <p>Welcome to the official page of <strong>Murasaki Games</strong> organization! We are currently developing an exciting, high-performance cross-platform multiplayer game.</p>
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <h1>Murasaki Games</h1>
+        <p>Official Developer Website. Building next-generation, high-performance multiplayer experiences.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h2 class="game-title">Fool Knights</h2>
         
-        <h3>Game Overview</h3>
-        <p>Our upcoming title is a dynamic 3D party game, built on <strong>Unreal Engine 5</strong>. Players build the levels in real-time, with sub-levels loading seamlessly directly into the main map.</p>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 50px auto; font-size: 1.1rem;">
+            A dynamic 3D party game built on <strong>Unreal Engine 5</strong>. Players can build levels in real-time, with sub-levels loading seamlessly directly into the main map active session.
+        </p>
 
-        <h3>Key Features</h3>
-        <ul>
-            <li><strong>Cross-Platform Play:</strong> Full multiplayer support between PC and Mobile devices.</li>
-            <li><strong>Maximum Performance:</strong> Highly optimized LowPoly AtlasGradient art style with Lumen disabled to ensure high framerates on all supported devices.</li>
-            <li><strong>Epic Online Services:</strong> Powered by EOS for secure authentication, cross-play matchmaking, and reliable Listen Server connections.</li>
-            <li><strong>Split-Screen Support:</strong> Play with your friends on a single screen or join online lobbies.</li>
-        </ul>
-    </div>
+        <!-- Features Grid -->
+        <div class="grid-features" id="features">
+            <div class="feature-card">
+                <h3>Cross-Platform Play</h3>
+                <p>Full multiplayer support ensures flawless gameplay connection between PC and Mobile devices.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Maximum Performance</h3>
+                <p>Highly optimized LowPoly AtlasGradient art style with Lumen disabled for extreme frame rates.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Epic Online Services</h3>
+                <p>Powered by EOS for secure authentication, cross-play matchmaking, and reliable connections.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Split-Screen Support</h3>
+                <p>Play locally with your friends on a single screen or jump straight into public online lobbies.</p>
+            </div>
+        </div>
+    </main>
 
-    <footer>
-        <p>&copy; 2026 Murasaki Games. All rights reserved.</p>
-        <p><a href="privacy-policy.html">Privacy Policy</a></p>
-        <p><a href="aken_18@outlook.com">Contact us</a></p>
-    </footer>
+    <!-- Media Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <h2 class="gallery-title">Gameplay Screenshots</h2>
+        <div class="gallery-grid">
+            
+            <!-- Screenshot 1 -->
+            <div class="gallery-item" onclick="openModal('img1.png')">
+                <img src="img1.png" alt="Fool Knights Gameplay 1">
+                <div class="gallery-overlay">
+                    <p>Level Exploration</p>
+                </div>
+            </div>
 
-</body>
-</html>
+            <!-- Screenshot 2 -->
+            <div class="gallery-item" onclick="openModal('img2.png')">
+                <img src="img2.png" alt="Fool Knights Gameplay 2">
+                <div class="gallery-overlay">
+                    <p>Dynamic Platforming</p>
+                </div>
+            </div>
+
+            <!-- Screenshot 3 -->
+            <div class="gallery-item" onclick="openModal('img3.png')">
+                <img src="img3.png" alt="Fool Knights Gameplay 3">
+                <div class="gallery-overlay">
+                    <p>Top-down Puzzle View</p>
+                </div>
+            </div>
+
+            <!-- Screenshot 4 -->
+            <div class="gallery-item" onclick="openModal('img4.png')">
+                <img src="img4.png" alt="Fool Knights Gameplay 4">
+                <div class="gallery-overlay">
+                    <p>Lobby Room Interaction</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="modal" onclick="closeModal()">
